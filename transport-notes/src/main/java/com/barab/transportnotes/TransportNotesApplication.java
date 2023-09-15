@@ -9,5 +9,5 @@ public class TransportNotesApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TransportNotesApplication.class, args);
 	}
-
+	//TODO: validation következik, 261-es videó
 }
