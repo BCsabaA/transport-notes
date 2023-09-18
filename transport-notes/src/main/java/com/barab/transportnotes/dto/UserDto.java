@@ -1,5 +1,7 @@
 package com.barab.transportnotes.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 @Setter
@@ -9,9 +11,14 @@ import lombok.*;
 @ToString
 public class UserDto {
     private Long id;
+    @NotEmpty(message = "First Name should not be empty!")
     private String firstName;
+    @NotEmpty(message = "Last Name should not be empty!")
     private String lastName;
+    @NotEmpty(message = "Email should not be empty!")
+    @Email
     private String email;
+    @NotEmpty(message = "Password should not be empty!")
     private String password;
     private String company;
 }

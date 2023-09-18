@@ -39,6 +39,27 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<UserDto> findAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(this::mapToUseDto).toList();
+    }
+
+    private UserDto mapToUseDto(User user) {
+        UserDto userDto = new UserDto();
+        String[] str = user.getName().split(" ");
+        userDto.setFirstName(str[0]);
+        userDto.setLastName(str[1]);
+        userDto.setEmail(user.getEmail());
+        userDto.setCompany(user.getCompany());
+        return userDto;
+    }
+
     private Role checkRoleExist() {
         Role role = new Role();
         role.setName("ADMIN");
