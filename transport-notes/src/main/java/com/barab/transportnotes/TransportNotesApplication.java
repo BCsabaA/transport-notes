@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TransportNotesApplication {
 
 	public static void main(String[] args) {
+		System.out.println("main....");
 		SpringApplication.run(TransportNotesApplication.class, args);
+
 	}
 	//TODO: users lista frontend, 263-as videó
 }
