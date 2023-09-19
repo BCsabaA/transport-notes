@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
     private UserDto mapToUseDto(User user) {
         UserDto userDto = new UserDto();
         String[] str = user.getName().split(" ");
+        userDto.setId(user.getId());
         userDto.setFirstName(str[0]);
         userDto.setLastName(str[1]);
         userDto.setEmail(user.getEmail());

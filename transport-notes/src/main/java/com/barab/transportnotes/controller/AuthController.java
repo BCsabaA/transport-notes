@@ -28,6 +28,12 @@ public class AuthController {
         return"index";
     }
 
+    //handler method to handel login request
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     //handler method to handle user registration form request
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -63,5 +69,7 @@ public class AuthController {
         model.addAttribute("users", users);
         return "users";
     }
+
+
 
 }
