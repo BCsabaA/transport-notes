@@ -4,6 +4,7 @@ import com.barab.transportnotes.dto.UserDto;
 import com.barab.transportnotes.entity.User;
 import com.barab.transportnotes.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -64,12 +65,23 @@ public class AuthController {
 
     //handler method to handle list of users
     @GetMapping("/users")
+    @PreAuthorize("hasRole('ADMIN')")
+    //TODO: role http beállításai
     public String users(Model model) {
         List<UserDto> users = userService.findAllUsers();
+        for (UserDto userDto : users
+             ) {
+            System.out.println(userDto.toString());
+        }
         model.addAttribute("users", users);
+        System.out.println("model: " + model.toString());
         return "users";
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
 
 
 }
