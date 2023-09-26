@@ -11,5 +11,4 @@ public class TransportNotesApplication {
 		SpringApplication.run(TransportNotesApplication.class, args);
 
 	}
-	//TODO: users lista frontend, 263-as videó
 }

@@ -27,7 +27,16 @@
 <br>
 <div class="container">
   <div class="row">
-    <div class="col-md-6 offset md-3">
+    <div class="col-md-6 offset-md-3">
+
+      <div th:if="${param.error}">
+        <div class="alert alert-danger"> Invalid Email or Password! </div>
+      </div>
+
+      <div th:if="${param.logout}">
+        <div class="alert alert-success"> You have logged out. </div>
+      </div>
+
       <div class="card">
         <div class="card-header">
           <h2 class="text-center">Login Form</h2>
@@ -50,7 +59,7 @@
               />
               <label for="password" class="control-label">Password</label>
               <input
-                      type="text"
+                      type="password"
                       id="password"
                       name="password"
                       class="form-control"
