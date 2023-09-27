@@ -5,6 +5,9 @@ import com.barab.transportnotes.entity.User;
 import com.barab.transportnotes.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class AuthController {
@@ -69,18 +74,37 @@ public class AuthController {
     //TODO: role http beállításai
     public String users(Model model) {
         List<UserDto> users = userService.findAllUsers();
-        for (UserDto userDto : users
-             ) {
-            System.out.println(userDto.toString());
-        }
         model.addAttribute("users", users);
-        System.out.println("model: " + model.toString());
+        //ha nem admin akkor indexre küldeni
         return "users";
     }
 
-    @GetMapping("/test")
+    @GetMapping("/notes")
     public String test() {
-        return "test";
+        return "notes";
+    }
+
+    @ModelAttribute("loggedInUser")
+    public org.springframework.security.core.userdetails.User globalUserObject(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("loggedInUser", authentication.getName());
+        model.addAttribute("isAdmin",isAdmin(authentication.getAuthorities()));
+        model.addAttribute("roles",authentication.getAuthorities());
+        return new org.springframework.security.core.userdetails.User(
+                authentication.getName(),
+                "",
+                authentication.getAuthorities());
+    }
+
+    private boolean isAdmin(Collection<? extends GrantedAuthority> authorities) {
+        boolean isAdmin = false;
+        for (GrantedAuthority authority : authorities
+        ){
+            if (Objects.equals(authority.getAuthority(), "ROLE_ADMIN")) {
+                isAdmin = true;
+            }
+        }
+        return isAdmin;
     }
 
 
