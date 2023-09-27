@@ -79,9 +79,9 @@ public class AuthController {
         return "users";
     }
 
-    @GetMapping("/test")
+    @GetMapping("/notes")
     public String test() {
-        return "test";
+        return "notes";
     }
 
     @ModelAttribute("loggedInUser")
@@ -90,12 +90,6 @@ public class AuthController {
         model.addAttribute("loggedInUser", authentication.getName());
         model.addAttribute("isAdmin",isAdmin(authentication.getAuthorities()));
         model.addAttribute("roles",authentication.getAuthorities());
-
-        System.out.println("globalUserObject:");
-        System.out.println(authentication.getName());
-        System.out.println(isAdmin(authentication.getAuthorities()));
-        System.out.println(authentication.getAuthorities());
-
         return new org.springframework.security.core.userdetails.User(
                 authentication.getName(),
                 "",
@@ -106,9 +100,6 @@ public class AuthController {
         boolean isAdmin = false;
         for (GrantedAuthority authority : authorities
         ){
-            System.out.println("isAdmin:");
-            System.out.println(authority.getAuthority());
-            System.out.println(authority.toString());
             if (Objects.equals(authority.getAuthority(), "ROLE_ADMIN")) {
                 isAdmin = true;
             }
