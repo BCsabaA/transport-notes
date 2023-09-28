@@ -28,6 +28,10 @@ public class Note {
     @JoinColumn(name = "destination_address_id")
     private Address destination;
 
+    @ManyToOne
+    @JoinColumn(name = "transport_status_id")
+    private TransportStatus transportStatus;
+
     private String comment;
 
     @OneToMany(cascade = CascadeType.ALL)
