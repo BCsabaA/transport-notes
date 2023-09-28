@@ -1,9 +1,14 @@
 package com.barab.transportnotes.controller;
 
+import com.barab.transportnotes.dto.AddressDto;
+import com.barab.transportnotes.dto.ItemDto;
 import com.barab.transportnotes.dto.UserDto;
 import com.barab.transportnotes.entity.User;
+import com.barab.transportnotes.service.AddressService;
+import com.barab.transportnotes.service.ItemService;
 import com.barab.transportnotes.service.UserService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,13 +25,17 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
+@AllArgsConstructor
 public class AuthController {
 
     private UserService userService;
+    private ItemService itemService;
+    private AddressService addressService;
 
-    public AuthController(UserService userService) {
-        this.userService = userService;
-    }
+//    public AuthController(UserService userService, ItemService itemService) {
+//        this.userService = userService;
+//        this.itemService = itemService;
+//    }
 
     //handler method to handle home page request
     @GetMapping("/index")
@@ -71,7 +80,6 @@ public class AuthController {
     //handler method to handle list of users
     @GetMapping("/users")
     @PreAuthorize("hasRole('ADMIN')")
-    //TODO: role http beállításai
     public String users(Model model) {
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users", users);
@@ -82,6 +90,20 @@ public class AuthController {
     @GetMapping("/notes")
     public String test() {
         return "notes";
+    }
+
+    @GetMapping("/items")
+    public String items(Model model) {
+        List<ItemDto> items = itemService.findAllItems();
+        model.addAttribute("items", items);
+        return "items";
+    }
+
+    @GetMapping("/addresses")
+    public String addresses(Model model) {
+        List<AddressDto> addresses = addressService.findAllItems();
+        model.addAttribute("addresses", addresses);
+        return "addresses";
     }
 
     @ModelAttribute("loggedInUser")
