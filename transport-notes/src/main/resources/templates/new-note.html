@@ -15,6 +15,11 @@
 <div th:replace="~{common/notesbar :: notesbar}"></div>
 <br>
 
+<script th:inline="javascript">
+    var addresses = /*[[${addresses}]]*/ [];
+    var testNumber = [[${testNumber}]];
+</script>
+
 <div class="container">
     <div class="row col-md-8 offset-md-2">
         <div class="card">

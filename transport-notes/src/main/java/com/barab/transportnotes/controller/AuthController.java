@@ -76,6 +76,9 @@ public class AuthController {
         //get the choice list for statuses select
         List<String> statuses = statusService.findAllNames();
         model.addAttribute("statuses", statuses);
+
+        model.addAttribute("testNumber",5);
+
         return "new-note";
     }
 
