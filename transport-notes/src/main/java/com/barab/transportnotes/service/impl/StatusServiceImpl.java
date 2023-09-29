@@ -23,6 +23,12 @@ public class StatusServiceImpl implements StatusService {
         return statuses.stream().map(this::mapToStatusDto).collect(Collectors.toList());
     }
 
+    @Override
+    public List<String> findAllNames() {
+        List<TransportStatus> statuses = statusRepository.findAll(Sort.by("id"));
+        return statuses.stream().map(this::mapToStatusDto).map(StatusDto::getName).collect(Collectors.toList());
+    }
+
     private StatusDto mapToStatusDto(TransportStatus status) {
         StatusDto statusDto = new StatusDto();
         statusDto.setId(status.getId());

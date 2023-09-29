@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface StatusService {
     List<StatusDto> findAllItems();
+
+    List<String> findAllNames();
 }

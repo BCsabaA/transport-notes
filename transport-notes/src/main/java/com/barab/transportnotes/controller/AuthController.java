@@ -1,9 +1,6 @@
 package com.barab.transportnotes.controller;
 
-import com.barab.transportnotes.dto.AddressDto;
-import com.barab.transportnotes.dto.ItemDto;
-import com.barab.transportnotes.dto.StatusDto;
-import com.barab.transportnotes.dto.UserDto;
+import com.barab.transportnotes.dto.*;
 import com.barab.transportnotes.entity.User;
 import com.barab.transportnotes.service.AddressService;
 import com.barab.transportnotes.service.ItemService;
@@ -61,6 +58,36 @@ public class AuthController {
         return "register";
     }
 
+    @GetMapping("/new-note")
+    public String showNewNoteForm(Model model) {
+        //create a model object to store form data
+        NoteDto note = new NoteDto();
+        model.addAttribute("note", note);
+
+        //get the choice list for statuses select
+        List<AddressDto> addresses = addressService.findAllItems();
+        model.addAttribute("addresses", addresses);
+
+        //TODO: címek keresése a felületen -> kulcsszó kereséses legördülő mező
+        //TODO: FORM kitöltési ellenőrzés
+
+
+
+        //get the choice list for statuses select
+        List<String> statuses = statusService.findAllNames();
+        model.addAttribute("statuses", statuses);
+        return "new-note";
+    }
+
+    @PostMapping("/new-note/save")
+    public String saveNewNote(@ModelAttribute("note") NoteDto noteDto, BindingResult bindingResult, Model model) {
+        System.out.println(noteDto.toString());
+
+
+
+        return "/notes";
+    }
+
     //handler method to handle user registration form submit request
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDto userDto , BindingResult bindingResult, Model model) {
@@ -91,7 +118,7 @@ public class AuthController {
     }
 
     @GetMapping("/notes")
-    public String test() {
+    public String showNotes() {
         return "notes";
     }
 
