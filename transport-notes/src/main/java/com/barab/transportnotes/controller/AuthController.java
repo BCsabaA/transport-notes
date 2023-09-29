@@ -2,10 +2,12 @@ package com.barab.transportnotes.controller;
 
 import com.barab.transportnotes.dto.AddressDto;
 import com.barab.transportnotes.dto.ItemDto;
+import com.barab.transportnotes.dto.StatusDto;
 import com.barab.transportnotes.dto.UserDto;
 import com.barab.transportnotes.entity.User;
 import com.barab.transportnotes.service.AddressService;
 import com.barab.transportnotes.service.ItemService;
+import com.barab.transportnotes.service.StatusService;
 import com.barab.transportnotes.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -31,6 +33,7 @@ public class AuthController {
     private UserService userService;
     private ItemService itemService;
     private AddressService addressService;
+    private StatusService statusService;
 
 //    public AuthController(UserService userService, ItemService itemService) {
 //        this.userService = userService;
@@ -104,6 +107,13 @@ public class AuthController {
         List<AddressDto> addresses = addressService.findAllItems();
         model.addAttribute("addresses", addresses);
         return "addresses";
+    }
+
+    @GetMapping("/statuses")
+    public String statuses(Model model) {
+        List<StatusDto> statuses = statusService.findAllItems();
+        model.addAttribute("statuses", statuses);
+        return "statuses";
     }
 
     @ModelAttribute("loggedInUser")
