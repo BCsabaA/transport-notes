@@ -9,6 +9,8 @@
           rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
           crossorigin="anonymous">
+    <link th:href="@{/styles/custom.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
 </head>
 <body>
 <div th:replace="~{common/header :: header}"></div>
@@ -38,7 +40,7 @@
 
                     <div class="form-group mb-3">
                         <label for="dropDownSourceList">Source address name</label>
-                        <select th:field="*{source}" class="form-control" id="dropDownSourceList">
+                        <select onchange="setSourceAddressDetails()" th:field="*{source}" class="form-control" id="dropDownSourceList">
                             <option value="" disabled selected>Select source address</option>
                             <option th:each="addressItem : ${addresses}" th:value="${addressItem.name}" th:text="${addressItem.name}"></option>
                         </select>
@@ -48,6 +50,15 @@
                                 id="sourceAddress"
                                 name="sourceAddress"
                                 type="text"
+                                disabled="disabled"
+                        />
+                        <label for="sourceComment" class="form-label">Source address</label>
+                        <input
+                                class="form-control"
+                                id="sourceComment"
+                                name="sourceComment"
+                                type="text"
+                                disabled="disabled"
                         />
                     </div>
 
