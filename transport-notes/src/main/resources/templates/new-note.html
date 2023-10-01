@@ -20,6 +20,8 @@
 <script th:inline="javascript">
     var addresses = /*[[${addresses}]]*/ [];
     var testNumber = [[${testNumber}]];
+    console.log("Html:");
+    console.log(addresses);
 </script>
 
 <div class="container">
@@ -39,8 +41,8 @@
                 >
 
                     <div class="form-group mb-3">
-                        <label for="dropDownSourceList">Source address name</label>
-                        <select onchange="setSourceAddressDetails()" th:field="*{source}" class="form-control" id="dropDownSourceList">
+                        <label for="sourceNameDropdown">Source name</label>
+                        <select onchange="setAddressDetails('source')" th:field="*{source}" class="form-control" id="sourceNameDropdown">
                             <option value="" disabled selected>Select source address</option>
                             <option th:each="addressItem : ${addresses}" th:value="${addressItem.name}" th:text="${addressItem.name}"></option>
                         </select>
@@ -52,7 +54,7 @@
                                 type="text"
                                 disabled="disabled"
                         />
-                        <label for="sourceComment" class="form-label">Source address</label>
+                        <label for="sourceComment" class="form-label">Source comment</label>
                         <input
                                 class="form-control"
                                 id="sourceComment"
@@ -65,12 +67,29 @@
 
 
                     <div class="form-group mb-3">
-                        <label for="dropDownDestinationList">Destination address name</label>
-                        <select th:field="*{destination}" class="form-control" id="dropDownDestinationList">
-                        <option value="" disabled selected>Select destination address</option>
+                        <label for="destinationNameDropdown">Destination name</label>
+                        <select onchange='setAddressDetails("destination")' th:field="*{destination}" class="form-control" id="destinationNameDropdown">
+                            <option value="" disabled selected>Select destination address</option>
                             <option th:each="addressItem : ${addresses}" th:value="${addressItem.name}" th:text="${addressItem.name}"></option>
-                    </select>
+                        </select>
+                        <label for="destinationAddress" class="form-label">Destination address</label>
+                        <input
+                                class="form-control"
+                                id="destinationAddress"
+                                name="destinationAddress"
+                                type="text"
+                                disabled="disabled"
+                        />
+                        <label for="destinationComment" class="form-label">Destination comment</label>
+                        <input
+                                class="form-control"
+                                id="destinationComment"
+                                name="destinationComment"
+                                type="text"
+                                disabled="disabled"
+                        />
                     </div>
+
 
                     <div class="form-group mb-3">
                         <label for="dropDownStatusList">Status</label>
