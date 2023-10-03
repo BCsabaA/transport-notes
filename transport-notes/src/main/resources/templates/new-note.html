@@ -24,29 +24,36 @@
     console.log(addresses);
 </script>
 
-<div class="container">
-    <div class="row col-md-8 offset-md-2">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="text-center">New Note</h2>
-
-
-            </div>
-            <div class="card-body">
+<div class="container ">
+    <div class="row">
+        <div class="col-6 offset-3">
                 <form
                         method="post"
                         role="form"
                         th:action="@{/new-note/save}"
                         th:object="${note}"
+
                 >
 
-                    <div class="form-group mb-3">
-                        <label for="sourceNameDropdown">Source name</label>
-                        <select onchange="setAddressDetails('source')" th:field="*{source}" class="form-control" id="sourceNameDropdown">
-                            <option value="" disabled selected>Select source address</option>
-                            <option th:each="addressItem : ${addresses}" th:value="${addressItem.name}" th:text="${addressItem.name}"></option>
-                        </select>
-                        <label for="sourceAddress" class="form-label">Source address</label>
+                    <div class="row">
+                            <div class="col-7">
+                                <label class="form-label align-bottom" for="sourceNameDropdown">Source</label>
+                            </div>
+                            <div class="col-5 position-relative" id="relativeDiv">
+<!--                                <button class="btn btn-info btn-sm position-absolute top-0 end-0" type="button" th:href="@{/new-address}" >New address</button>-->
+                                <a class="btn btn-info btn-sm position-absolute top-0 end-0" th:href="@{/new-address}">New Address</a>
+                            </div>
+                    </div>
+                        <div class="form-group">
+
+                            <select onchange="setAddressDetails('source')" th:field="*{source}" class="form-control" id="sourceNameDropdown">
+                                <option value="Select source address" selected></option>
+                                <option th:each="addressItem : ${addresses}" th:value="${addressItem.name}" th:text="${addressItem.name}"></option>
+                            </select>
+
+                    </div>
+                    <div class="form-group col">
+<!--                        <label for="sourceAddress" class="label">Source address</label>-->
                         <input
                                 class="form-control"
                                 id="sourceAddress"
@@ -54,7 +61,10 @@
                                 type="text"
                                 disabled="disabled"
                         />
-                        <label for="sourceComment" class="form-label">Source comment</label>
+                    </div>
+                    <div class="form-group col">
+<!--                        <label for="sourceComment" class="label">Source comment</label>-->
+
                         <input
                                 class="form-control"
                                 id="sourceComment"
@@ -66,13 +76,21 @@
 
 
 
-                    <div class="form-group mb-3">
-                        <label for="destinationNameDropdown">Destination name</label>
+                    <div class="form-group col">
+<!--                        <label class="form-label" for="destinationNameDropdown">Destination</label>-->
+                        <div class="row">
+                            <div class="col-7">
+                                <label class="form-label align-bottom" for="destinationNameDropdown">Destination</label>
+                            </div>
+                            <div class="col-5 position-relative">
+                                <a class="btn btn-info btn-sm position-absolute top-0 end-0" th:href="@{/new-address}">New Address</a>
+                            </div>
+                        </div>
                         <select onchange='setAddressDetails("destination")' th:field="*{destination}" class="form-control" id="destinationNameDropdown">
-                            <option value="" disabled selected>Select destination address</option>
+                            <option value="Select destination address" selected></option>
                             <option th:each="addressItem : ${addresses}" th:value="${addressItem.name}" th:text="${addressItem.name}"></option>
                         </select>
-                        <label for="destinationAddress" class="form-label">Destination address</label>
+<!--                        <label for="destinationAddress" class="form-label">Destination address</label>-->
                         <input
                                 class="form-control"
                                 id="destinationAddress"
@@ -80,7 +98,7 @@
                                 type="text"
                                 disabled="disabled"
                         />
-                        <label for="destinationComment" class="form-label">Destination comment</label>
+<!--                        <label for="destinationComment" class="form-label">Destination comment</label>-->
                         <input
                                 class="form-control"
                                 id="destinationComment"
@@ -91,16 +109,16 @@
                     </div>
 
 
-                    <div class="form-group mb-3">
-                        <label for="dropDownStatusList">Status</label>
+                    <div class="form-group col">
+                        <label class="form-label align-bottom" for="dropDownStatusList">Status</label>
                         <select th:field="*{transportStatus}" class="form-control" id="dropDownStatusList">
                             <option value="" disabled selected>Select status</option>
                             <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
                         </select>
                     </div>
 
-                    <div class="form-group mb-3">
-                        <label for="comment" class="form-label">Comment</label>
+                    <div class="form-group col">
+                        <label for="comment" class="form-label align-bottom">Comment</label>
                         <input
                                 class="form-control"
                                 id="comment"
@@ -112,9 +130,7 @@
 <!--                        <p th:errors = "*{firstName}" class="text-danger" th:if = "${#fields.hasErrors('firstName')}"></p>-->
                     </div>
 
-                    <div class="form-group">
                         <button class="btn btn-primary" type="submit">Save new transport note</button>
-                    </div>
 
 
 
@@ -128,13 +144,10 @@
 
 
                 </form>
-
-            </div>
         </div>
-
     </div>
-</div>
 
+</div>
 
 </body>
 </html>

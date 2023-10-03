@@ -82,6 +82,19 @@ public class AuthController {
         return "new-note";
     }
 
+    @GetMapping("/new-address")
+    public String showNewAddressForm(Model model) {
+        System.out.println("In new address page.");
+
+
+        return "/new-address";
+    }
+
+    @PostMapping("/new-address/save")
+    public String saveNewAddress() {
+        return "redirect:/new-note";
+    }
+
     @PostMapping("/new-note/save")
     public String saveNewNote(@ModelAttribute("note") NoteDto noteDto, BindingResult bindingResult, Model model) {
         System.out.println(noteDto.toString());
