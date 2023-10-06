@@ -18,6 +18,9 @@
     <div class="row col-md-10">
         <h2>List of Registered Addresses</h2>
     </div>
+    <div class="row">
+        <a class="btn btn-dark btn-sm btn-block" th:href="@{/new-address}">New Address</a>
+    </div>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
@@ -28,16 +31,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each = "address : ${addresses}">
-            <td th:text = "${address.id}"></td>
-            <td th:text = "${address.name}"></td>
-            <td th:text = "${address.address}"></td>
-            <td th:text = "${address.comment}"></td>
+        <tr th:each="address : ${addresses}">
+            <td th:text="${address.id}"></td>
+            <td th:text="${address.name}"></td>
+            <td th:text="${address.address}"></td>
+            <td th:text="${address.comment}"></td>
         </tr>
         </tbody>
     </table>
 </div>
-
 
 
 </body>

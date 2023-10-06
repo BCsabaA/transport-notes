@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -65,7 +66,10 @@ public class AuthController {
         model.addAttribute("note", note);
 
         //get the choice list for statuses select
-        List<AddressDto> addresses = addressService.findAllItems();
+        List<AddressDto> addresses = addressService.findAllItems().
+                stream().
+                sorted((addressDto1, addressDto2) ->  addressDto1.getName().compareTo(addressDto2.getName()) ).
+                collect(Collectors.toList());
         model.addAttribute("addresses", addresses);
 
         //TODO: címek keresése a felületen -> kulcsszó kereséses legördülő mező
@@ -80,6 +84,20 @@ public class AuthController {
         model.addAttribute("testNumber",5);
 
         return "new-note";
+    }
+
+    @GetMapping("/new-address")
+    public String showNewAddressForm(Model model) {
+        AddressDto newAddress = new AddressDto();
+        model.addAttribute("newAddress",newAddress);
+        return "/new-address";
+    }
+
+    @PostMapping("/new-address/save")
+    public String saveNewAddress(@ModelAttribute("newAddress") AddressDto addressDto, BindingResult bindingResult, Model model) {
+        System.out.println(addressDto.toString());
+        addressService.saveAddress(addressDto);
+        return "/new-address";
     }
 
     @PostMapping("/new-note/save")

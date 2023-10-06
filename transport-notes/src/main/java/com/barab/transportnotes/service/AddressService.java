@@ -7,5 +7,6 @@ import java.util.List;
 public interface AddressService {
 
     List<AddressDto> findAllItems();
+    public void saveAddress(AddressDto addressDto);
 
 }
