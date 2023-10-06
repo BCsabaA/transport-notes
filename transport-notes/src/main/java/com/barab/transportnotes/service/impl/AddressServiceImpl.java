@@ -22,6 +22,22 @@ public class AddressServiceImpl implements AddressService {
         return addresses.stream().map(this::mapToAddressDto).collect(Collectors.toList());
     }
 
+    @Override
+    public void saveAddress(AddressDto addressDto) {
+        Address address = mapToAddress(addressDto);
+        System.out.println("Address to save: " + address.toString());
+        Address savedUser = addressRepository.save(address);
+        System.out.println("Saves user: " + savedUser);
+    }
+
+    private Address mapToAddress(AddressDto addressDto) {
+        Address address = new Address();
+        address.setName(addressDto.getName());
+        address.setAddress(addressDto.getAddress());
+        address.setComment(addressDto.getComment());
+        return address;
+    }
+
     private AddressDto mapToAddressDto(Address address) {
         AddressDto addressDto = new AddressDto();
         addressDto.setId(address.getId());

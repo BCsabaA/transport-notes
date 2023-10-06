@@ -40,8 +40,7 @@
                                 <label class="form-label align-bottom" for="sourceNameDropdown">Source</label>
                             </div>
                             <div class="col-5 position-relative" id="relativeDiv">
-<!--                                <button class="btn btn-info btn-sm position-absolute top-0 end-0" type="button" th:href="@{/new-address}" >New address</button>-->
-                                <a class="btn btn-info btn-sm position-absolute top-0 end-0" th:href="@{/new-address}">New Address</a>
+<!--                                <a class="btn btn-info btn-sm position-absolute top-0 end-0" th:href="@{/new-address}">New Address</a>-->
                             </div>
                     </div>
                         <div class="form-group">
@@ -83,7 +82,7 @@
                                 <label class="form-label align-bottom" for="destinationNameDropdown">Destination</label>
                             </div>
                             <div class="col-5 position-relative">
-                                <a class="btn btn-info btn-sm position-absolute top-0 end-0" th:href="@{/new-address}">New Address</a>
+<!--                                <a class="btn btn-info btn-sm position-absolute top-0 end-0" th:href="@{/new-address}">New Address</a>-->
                             </div>
                         </div>
                         <select onchange='setAddressDetails("destination")' th:field="*{destination}" class="form-control" id="destinationNameDropdown">
